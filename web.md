@@ -1,57 +1,64 @@
-# Proyecto WEB — Panel de Gestión
+## 🌐 Funcionalidades Principales
 
-## Características Principales
-- El proyecto es capaz de recibir **actualizaciones en tiempo real** sobre el estado de cada trabajo.
-- El equipo administrador puede **crear, actualizar, modificar o eliminar** asignaciones y trabajos.
-- El equipo puede **registrar nuevos empleados**.
-- El equipo puede **asignar trabajos a distintos equipos**, así como **mover miembros entre equipos**.
-- Se pueden **filtrar trabajos** por estado, equipo asignado y empresa.
-- Usa **SSE** para escuchar actualizaciones de progreso en tiempo real.
+### Para Administrativos (usuarios autenticados)
+- Visualizar **todas las órdenes activas** (no finalizadas) en una interfaz estilo foro/muro.
+- Consultar detalles de cada orden: cliente, equipo, ubicación, estado actual, última actualización.
+- Filtrar/buscar órdenes por:
 
----
+  - Número de orden
+- Ver el **historial completo de actualizaciones** realizadas por los técnicos.
+- Recibir **actualizaciones en tiempo real** mediante **Server-Sent Events (SSE)**.
 
-## Flujo de trabajo
-
-### Conexión y Reconexión
-
-1. **HTTP REQUEST GET**  
-   - Al abrir el panel web, se envía un `GET` al servidor para obtener **todos los datos actuales**: trabajos, asignaciones, empleados y equipos.
-
-2. **Conexión SSE**  
-   - El panel mantiene una conexión **SSE** para recibir **actualizaciones en tiempo real** (cambios de estado, avances de progreso).
+### Para Clientes Externos (sin autenticación)
+- Ingresar el **número de seguimiento** para consultar el estado de su servicio.
+- Ver estado actual, última actualización y datos básicos del equipo.
 
 ---
 
-### Operaciones principales
+## 🔄 Flujo de Datos
 
-1. **HTTP REQUEST POST**
-   - Crear un **nuevo trabajo**: el administrador captura los datos → `POST /trabajos`.
-   - Registrar un **nuevo empleado**: el administrador captura los datos → `POST /empleados`.
+### Carga Inicial
+- `GET /ordenes`: Carga las órdenes activas (no finalizadas) junto con su última actualización.
 
-2. **HTTP REQUEST PATCH**
-   - Modificar un trabajo: `PATCH /trabajos/{id}`.
-   - Modificar asignaciones de empleados o moverlos de equipo: `PATCH /empleados/{id}/asignacion`.
-
-3. **HTTP REQUEST DELETE**
-   - Eliminar un trabajo existente: `DELETE /trabajos/{id}`.
-   - Eliminar un empleado: `DELETE /empleados/{id}`.
+### Conexión en Tiempo Real
+- `GET /stream`: Establece conexión SSE con el servidor.
+- Escucha y actualiza la vista automáticamente cuando se reportan:
+  - Nuevas actualizaciones del técnico
+  - Cambios de estado
+  - Finalización de una orden
 
 ---
 
-### Filtros y búsqueda
-- Se pueden aplicar **filtros por estado, equipo o empresa** mediante query params en `GET`.
-  - Ejemplo: `/trabajos?estado=pendiente&equipo=5`
+## 🔧 Endpoints Principales
+
+### Lectura
+- `GET /ordenes`: Obtener todas las órdenes activas.
+- `GET /ordenes/{id}`: Detalles y todas las actualizaciones de una orden.
+- `GET /ordenes?cliente=...&estado=...`: Filtros combinados.
+- `GET /seguimiento/{codigo}`: Consulta pública para clientes por número de orden.
+
+### SSE (Server-Sent Events)
+- `GET /stream`: Escucha de eventos en tiempo real.
 
 ---
 
-## Seguridad
-- Todos los endpoints deben protegerse con **roles y permisos**.
-- Autenticación con tokens seguros (JWT o sesión).
-- SSE restringido a usuarios autorizados.
+## 🔐 Seguridad
+
+- **JWT o sesiones seguras** para usuarios administrativos.
+- Los endpoints de administración están protegidos por **roles y permisos**.
+- La consulta por número de rastreo no requiere autenticación.
+- SSE solo disponible para usuarios autorizados.
 
 ---
 
-## Tiempo real
-- Cualquier **cambio** (POST, PATCH, DELETE) debe notificar por **SSE** a **todos los paneles web conectados**, garantizando que la vista siempre está sincronizada.
+## 💡 Interfaz Web
 
+- Diseño tipo **muro de tarjetas**, cada tarjeta representa una orden activa.
+- La tarjeta muestra:
+  - Cliente
+  - Equipo
+  - Estado actual
+  - Última nota del técnico
+- Opciones de búsqueda y filtrado visibles para mejorar la navegación.
+- Para los clientes: una interfaz simple donde solo introducen su número de rastreo para ver el estado de su servicio.
 
