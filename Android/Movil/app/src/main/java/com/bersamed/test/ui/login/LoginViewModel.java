@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
+import com.bersamed.test.data.LoginDataSource;
 import com.bersamed.test.data.LoginRepository;
-import com.bersamed.test.data.Result;
 import com.bersamed.test.data.model.LoggedInUser;
 import com.bersamed.test.R;
 
@@ -17,29 +17,32 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
-    LoginViewModel(LoginRepository loginRepository) {
+    public LoginViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
 
-    LiveData<LoginFormState> getLoginFormState() {
+    public LiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
     }
 
-    LiveData<LoginResult> getLoginResult() {
+    public LiveData<LoginResult> getLoginResult() {
         return loginResult;
     }
 
     public void login(String username, String password) {
-        // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+        loginRepository.login(username, password, new LoginDataSource.LoginCallback() {
+            @Override
+            public void onSuccess(LoggedInUser user) {
+                loginResult.postValue(new LoginResult(new LoggedInUserView(user.getDisplayName())));
+            }
 
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+            @Override
+            public void onError(String errorMessage) {
+                loginResult.postValue(new LoginResult(R.string.login_failed));
+            }
+        });
     }
+
 
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
@@ -51,7 +54,6 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    // A placeholder username validation check
     private boolean isUserNameValid(String username) {
         if (username == null) {
             return false;
@@ -63,7 +65,6 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    // A placeholder password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
     }

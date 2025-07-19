@@ -1,10 +1,14 @@
 package com.bersamed.test.ui.login;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -22,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bersamed.test.MainActivity;
 import com.bersamed.test.R;
 import com.bersamed.test.ui.login.LoginViewModel;
 import com.bersamed.test.ui.login.LoginViewModelFactory;
@@ -31,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
+        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory(this))
                 .get(LoginViewModel.class);
 
         final EditText usernameEditText = binding.username;
@@ -70,18 +77,22 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 loadingProgressBar.setVisibility(View.GONE);
+
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
+                } else if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
-                finish();
+                    // Ir a MainActivity
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+                    // Cierra LoginActivity para que no se pueda volver con "back"
+                    finish();
+                }
             }
         });
+
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -125,12 +136,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
+        String welcome = getString(R.string.welcome) + model.getDisplayName() + "!";
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
+        Log.d(TAG, "showLoginFailed: "+ errorString);
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }
