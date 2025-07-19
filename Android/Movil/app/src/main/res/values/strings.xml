@@ -8,6 +8,6 @@
     <string name="welcome">"Bienvenido de vuelta "</string>
     <string name="invalid_username">No es un usuario valido</string>
     <string name="invalid_password">Contraseña muy corta</string>
-    <string name="login_failed">"Usuario o contraseña incorrecta"</string>
+    <string name="login_failed">"Usuario o contraseña incorrectos"</string>
     <string name="autenticationURL">http://192.168.100.74:8080/api/login</string>
 </resources>
