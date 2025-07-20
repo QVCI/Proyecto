@@ -2,7 +2,7 @@
     <string name="app_name">Test</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Contraseña</string>
+    <string name="prompt_password">Ingresa tu clave</string>
     <string name="action_sign_in">Iniciar Sesión</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Bienvenido de vuelta "</string>
