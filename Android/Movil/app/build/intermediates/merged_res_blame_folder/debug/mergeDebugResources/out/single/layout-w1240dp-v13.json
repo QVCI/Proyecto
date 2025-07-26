@@ -1,0 +1,6 @@
+[
+    {
+        "merged": "com.bersamed.test.app-mergeDebugResources-33:/layout-w1240dp-v13/activity_login.xml",
+        "source": "com.bersamed.test.app-main-36:/layout-w1240dp/activity_login.xml"
+    }
+]

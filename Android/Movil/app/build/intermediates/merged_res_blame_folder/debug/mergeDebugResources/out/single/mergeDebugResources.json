@@ -1,0 +1,118 @@
+[
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\font_poppins_semibold.ttf.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\font\\poppins_semibold.ttf"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "com.bersamed.test.app-debug-34:/layout_activity_login.xml.flat",
+        "source": "com.bersamed.test.app-main-36:/layout/activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\drawable_iconos.png.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\drawable\\iconos.png"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\layout-w1240dp_activity_login.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\layout-w1240dp\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-anydpi\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\layout-w936dp_activity_login.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\layout-w936dp\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-anydpi\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\drawable_user.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\drawable\\user.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\drawable_boxes.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\drawable\\boxes.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\drawable_password.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\drawable\\password.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\drawable_redondeado.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\drawable\\redondeado.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\drawable_logo.png.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\drawable\\logo.png"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-debug-34:\\xml_network_security_config.xml.flat",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\xml\\network_security_config.xml"
+    }
+]

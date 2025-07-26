@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.bersamed.test.app-mergeDebugResources-33:/layout/activity_login.xml",
+        "source": "com.bersamed.test.app-main-36:/layout/activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-mergeDebugResources-33:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-mergeDebugResources-33:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\carlo\\.gradle\\daemon\\8.11.1\\com.bersamed.test.app-main-36:\\layout\\activity_login.xml"
+    }
+]
