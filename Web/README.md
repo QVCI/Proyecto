@@ -1,4 +1,4 @@
-## 🌐 Funcionalidades Principales
+## Funcionalidades Principales de WebApp
 
 ### Para Administrativos (usuarios autenticados)
 - Visualizar **todas las órdenes activas** (no finalizadas) en una interfaz estilo foro/muro.
