@@ -4,7 +4,7 @@ public class PeticionLogin {
   private String usuario;
     private String password;
 
-    // Constructor vacío (requerido por Spring para deserializar JSON)
+    
     public PeticionLogin() {
     }
 

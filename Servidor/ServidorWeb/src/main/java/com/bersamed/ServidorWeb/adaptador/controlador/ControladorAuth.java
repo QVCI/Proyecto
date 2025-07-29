@@ -5,16 +5,15 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bersamed.ServidorWeb.adaptador.controlador.servicio.AutenticacionServicio;
 import com.bersamed.ServidorWeb.infraestructura.config.Configuraciones;
-import com.bersamed.ServidorWeb.infraestructura.jwt.JwtUtil;
-import com.bersamed.ServidorWeb.infraestructura.jwt.Sha1Util;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
+import com.bersamed.ServidorWeb.infraestructura.jwt.HashUtil;
 
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
@@ -23,31 +22,37 @@ import jakarta.servlet.http.HttpServletRequest;
 
 
 
-
-
 @RestController
-
-
 @RequestMapping("/auth")
-public class ControladorAuth {
+public class ControladorAuth 
+{
+    
 
-    Configuraciones configuraciones = new Configuraciones();
-
-
-    private final JwtUtil jwtUtil = new JwtUtil();
+    
+    private final AutenticacionServicio autenticacionServicio;
+    private final Configuraciones configuraciones = new Configuraciones();
     private final Map<String, Bucket> rateLimiters = new ConcurrentHashMap<>();
+    
 
-    private Bucket createNewBucket() 
-    {
-        return Bucket.builder()
-                .addLimit(Bandwidth.classic(configuraciones.getCantidadPeticionesSimultaneo(), 
-                Refill.intervally(configuraciones.getCantidadTokens(), 
-                Duration.ofMinutes(configuraciones.getTiempoRecargaTokens())))) 
-                .build();
-                 //limitar intentos a 5 x cada minuto para info más a detalle ver Configuraciones.java
+    public ControladorAuth(AutenticacionServicio autenticacionServicio) {
+        this.autenticacionServicio = autenticacionServicio;
     }
+
+    private Bucket createNewBucket() {
+        return Bucket.builder()
+                .addLimit(Bandwidth.classic(
+                    configuraciones.getCantidadPeticionesSimultaneo(), 
+                    Refill.intervally(
+                        configuraciones.getCantidadTokens(), 
+                        Duration.ofMinutes(configuraciones.getTiempoRecargaTokens()))
+                ))
+                .build();
+    }
+
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody PeticionLogin peticion, HttpServletRequest request) {
+    public ResponseEntity<String> login(@RequestBody PeticionLogin peticion, HttpServletRequest request) throws Exception 
+    {   
+  
         String usuario = peticion.getUsuario();
         String password = peticion.getPassword();
 
@@ -58,14 +63,20 @@ public class ControladorAuth {
             return ResponseEntity.status(429).body("Demasiados intentos. Intenta de nuevo en un momento.");
         }
 
-        String passwordHasheado = Sha1Util.hashSha1(password);
-
-        if (usuario.equals("admin") && passwordHasheado.equals(Sha1Util.hashSha1("1234"))) {
-            String token = jwtUtil.generarToken("Carlo");
+        try 
+        {
+            String token = autenticacionServicio.iniciarSesion(usuario, password);
             return ResponseEntity.ok(token);
-        } else {
-            return ResponseEntity.status(401).body("Credenciales inválidas");
+        } 
+        //Excepciones controladas
+        catch (RuntimeException ex) 
+        {
+            return ResponseEntity.status(401).body(ex.getMessage());
+        } 
+        //Excepciones internas
+        catch (Exception e) 
+        {
+            return ResponseEntity.status(500).body("Error interno del servidor");
         }
     }
-
 }
