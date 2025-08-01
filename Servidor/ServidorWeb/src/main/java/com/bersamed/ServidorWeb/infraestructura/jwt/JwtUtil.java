@@ -24,20 +24,54 @@ public class JwtUtil {
         this.clave = Keys.hmacShaKeyFor(configuraciones.getCertificadoAutogenerado().getBytes());
     }
 
-    public String generarToken(String abreviatura, String nombreUsuario) {
+    public String generarTokenTrabajador(String abreviatura, String nombreUsuario, Long id_Usuario) {
         Date ahora = new Date();
         Date expiracion = new Date(ahora.getTime() + 86400000); // 24 horas
 
         return Jwts.builder()
                 .setIssuer("servidorweb")
-                .setSubject(nombreUsuario)
+                .setSubject(String.valueOf(id_Usuario))
                 .setIssuedAt(ahora)
                 .setExpiration(expiracion)
                 .setId(UUID.randomUUID().toString())
-                .claim("name", abreviatura + " " + nombreUsuario)
+                .claim("nombre", abreviatura + " " + nombreUsuario)
+                .claim("rol", "Trabajador")
+                .signWith(clave, SignatureAlgorithm.HS256)
+                
+                .compact();
+    }
+    public String generarTokenTrabajador(String nombreUsuario, Long id_Usuario) {
+        Date ahora = new Date();
+        Date expiracion = new Date(ahora.getTime() + 86400000); // 24 horas
+
+        return Jwts.builder()
+                .setIssuer("servidorweb")
+                .setSubject(String.valueOf(id_Usuario))
+                .setIssuedAt(ahora)
+                .setExpiration(expiracion)
+                .setId(UUID.randomUUID().toString())
+                .claim("nombre", nombreUsuario)
+                .claim("rol", "Trabajador")
                 .signWith(clave, SignatureAlgorithm.HS256)
                 .compact();
     }
+
+   public String generarTokenCliente(String razonsocial, Long id_Usuario) {
+        Date ahora = new Date();
+        Date expiracion = new Date(ahora.getTime() + 86400000); // 24 horas
+
+        return Jwts.builder()
+                .setIssuer("servidorweb")
+                .setSubject(String.valueOf(id_Usuario))
+                .setIssuedAt(ahora)
+                .setExpiration(expiracion)
+                .setId(UUID.randomUUID().toString())
+                .claim("nombre", razonsocial)
+                .claim("rol", "Cliente")
+                .signWith(clave, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
 
     public Claims validarToken(String token) throws JwtException {
         return Jwts.parserBuilder()

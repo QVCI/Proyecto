@@ -1,11 +1,11 @@
 package com.bersamed.ServidorWeb.adaptador.controlador;
 
-public class PeticionLogin {
-  private String usuario;
+public class PeticionLoginTrabajadores {
+    private String usuario;
     private String password;
 
     
-    public PeticionLogin() {
+    public PeticionLoginTrabajadores() {
     }
 
     public String getUsuario() {

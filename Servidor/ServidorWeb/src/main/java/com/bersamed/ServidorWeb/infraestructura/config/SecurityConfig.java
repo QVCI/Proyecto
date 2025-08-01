@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+
 import jakarta.servlet.http.HttpServletResponse;
 
 
@@ -15,7 +16,8 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // Desactiva CSRF para facilitar pruebas
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/login").permitAll() // Permite login sin token
+                .requestMatchers("/login/trabajadores").permitAll() // Permite login sin token
+                .requestMatchers("/login/clientes").permitAll()
                 .anyRequest().authenticated()                // Resto protegido
             )
               .exceptionHandling(exception -> exception
