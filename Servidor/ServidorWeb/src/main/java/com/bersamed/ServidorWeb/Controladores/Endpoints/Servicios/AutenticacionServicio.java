@@ -2,7 +2,7 @@ package com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios;
 
 import org.springframework.stereotype.Service;
 
-import com.bersamed.ServidorWeb.Estructuras.Entidades.SubEntidades.ClienteInfoDatos;
+import com.bersamed.ServidorWeb.Estructuras.Entidades.ClienteEntidad;
 import com.bersamed.ServidorWeb.Estructuras.Entidades.TrabajadorEntidad;
 import com.bersamed.ServidorWeb.Repositorios.ClienteRepositorio;
 import com.bersamed.ServidorWeb.Repositorios.TrabajadorRepositorio;
@@ -13,13 +13,13 @@ import com.bersamed.ServidorWeb.Seguridad.Tokens.JwtUtil;
 @Service
 public class AutenticacionServicio {
 
-    private final TrabajadorRepositorio usuarioRepositorio;
+    private final TrabajadorRepositorio trabajadorRepositorio;
     private final ClienteRepositorio clienteRepositorio;
     private final JwtUtil jwtUtil;
 
-    public AutenticacionServicio(TrabajadorRepositorio usuarioRepositorio, ClienteRepositorio clienteRepositorio, JwtUtil jwtUtil) 
+    public AutenticacionServicio(TrabajadorRepositorio trabajadorRepositorio, ClienteRepositorio clienteRepositorio, JwtUtil jwtUtil) 
     {
-        this.usuarioRepositorio = usuarioRepositorio;
+        this.trabajadorRepositorio = trabajadorRepositorio;
         this.clienteRepositorio = clienteRepositorio;
         this.jwtUtil = jwtUtil;
     }
@@ -29,7 +29,7 @@ public class AutenticacionServicio {
     {
         
         
-        TrabajadorEntidad usuario = usuarioRepositorio.findByLogin(login)
+        TrabajadorEntidad usuario = trabajadorRepositorio.findByLogin(login)
                 .orElseThrow(() -> new RuntimeException("Usuario no existente"));
 
         String claveBD = usuario.getClavesistema();
@@ -67,24 +67,27 @@ public class AutenticacionServicio {
        
     }
 
-    public String iniciarSesionCliente(String correoElectronico, String rfc) throws Exception 
+    public String iniciarSesionCliente(String razonsocial, String rfc) throws Exception 
     {
 
-        //RFC en la base de datos
-        ClienteInfoDatos info = clienteRepositorio.findClienteInfoByCorreo(correoElectronico);
-    
-        if (info == null) {
-            throw new RuntimeException("Usuario no existente");
-        }
+        ClienteEntidad usuario = clienteRepositorio.findByRazonSocial(razonsocial)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                
 
-
+        String RFC = usuario.getRfc();
         
-        if (!info.getRfc().equals(rfc)) {
-            throw new RuntimeException("RFC incorrecto");
+        if(RFC == null || RFC.trim().isEmpty())
+        {
+             throw new RuntimeException("El usuario " + razonsocial + " no tiene guardado un rfc asociado," + 
+            " solicite apoyo de atención al cliente");
         }
 
-      
-        return jwtUtil.generarTokenCliente(info.getRazonSocial(), info.getIdcliente());
+        if(!RFC.equals(rfc))
+        {
+            throw new RuntimeException("Credenciales inválidas");
+        }
+              
+        return jwtUtil.generarTokenCliente(usuario.getRazonsocial(), usuario.getIdcliente());
     }
 
         

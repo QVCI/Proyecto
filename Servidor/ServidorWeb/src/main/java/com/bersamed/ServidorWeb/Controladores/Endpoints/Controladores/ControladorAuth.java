@@ -1,7 +1,10 @@
 package com.bersamed.ServidorWeb.Controladores.Endpoints.Controladores;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios.AutenticacionServicio;
 import com.bersamed.ServidorWeb.Estructuras.Json.PeticionLoginClientes;
@@ -47,7 +50,7 @@ public class ControladorAuth {
         }
        
         try {
-            String token = autenticacionServicio.iniciarSesionCliente(peticion.getCorreoElectronico(), peticion.getRFC());
+            String token = autenticacionServicio.iniciarSesionCliente(peticion.getRazonSocial(), peticion.getRfc());
             return ResponseEntity.ok(token);
         } catch (RuntimeException ex) {
             return ResponseEntity.status(401).body(ex.getMessage());

@@ -3,25 +3,27 @@ package com.bersamed.ServidorWeb.Estructuras.Json;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PeticionLoginClientes {
-    @JsonProperty("CorreoElectronico")
-    private String correoElectronico;
+    @JsonProperty("RazonSocial")
+    private String RazonSocial;
 
     @JsonProperty("RFC")
     private String rfc;
 
-    public String getCorreoElectronico() {
-        return correoElectronico;
+    public String getRazonSocial() {
+        return RazonSocial;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public void setRazonSocial(String razonSocial) {
+        RazonSocial = razonSocial;
     }
 
-    public String getRFC() {
+    public String getRfc() {
         return rfc;
     }
 
-    public void setRFC(String rfc) {
+    public void setRfc(String rfc) {
         this.rfc = rfc;
     }
+
+   
 }
