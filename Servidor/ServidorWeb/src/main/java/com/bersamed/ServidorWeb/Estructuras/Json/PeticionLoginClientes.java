@@ -2,6 +2,7 @@ package com.bersamed.ServidorWeb.Estructuras.Json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+//Estructura de petición para login
 public class PeticionLoginClientes {
     @JsonProperty("RazonSocial")
     private String RazonSocial;

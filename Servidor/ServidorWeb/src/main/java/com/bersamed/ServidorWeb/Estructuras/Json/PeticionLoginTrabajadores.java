@@ -1,9 +1,9 @@
 package com.bersamed.ServidorWeb.Estructuras.Json;
 
+//Estructura de petición para login
 public class PeticionLoginTrabajadores {
     private String usuario;
     private String password;
-
     
     public PeticionLoginTrabajadores() {
     }

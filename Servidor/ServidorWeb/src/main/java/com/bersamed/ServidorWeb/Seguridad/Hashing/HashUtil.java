@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public class HashUtil 
 {
+    //Cacular Hash
     public static String calcularHash(String clave, String sal) {
         final short longitudSal = 16;
 
@@ -69,7 +70,6 @@ public class HashUtil
     }
 
     private static char[] byteArrayToCharArray(byte[] bytes) {
-        // Conversión byte[] → char[] (cada byte convertido a dos chars hexadecimales)
         char[] chars = new char[bytes.length * 2];
         final char[] hexArray = "0123456789ABCDEF".toCharArray();
 

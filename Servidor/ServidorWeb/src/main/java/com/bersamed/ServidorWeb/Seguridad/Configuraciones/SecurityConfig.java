@@ -14,11 +14,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Desactiva CSRF para facilitar pruebas
+            .csrf(csrf -> csrf.disable()) // Desactiva CSRF 
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/login/trabajadores").permitAll() // Permite login sin token
                 .requestMatchers("/login/clientes").permitAll()
-                .anyRequest().authenticated()                // Resto protegido
+                .anyRequest().authenticated()    // Resto de endpoints protegidos
             )
               .exceptionHandling(exception -> exception
                 .authenticationEntryPoint((request, response, authException) -> {

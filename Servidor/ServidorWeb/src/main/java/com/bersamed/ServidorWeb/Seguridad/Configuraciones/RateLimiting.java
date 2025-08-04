@@ -23,8 +23,7 @@ public class RateLimiting
     //Establece la cantidad de tokens que se consumiran por cada petición
     private final int tokensConsumidosPorPeticion = 1;
 
-
-
+    
     public boolean permitirPeticion(String ip) {
         Bucket bucket = buckets.computeIfAbsent(ip, k -> crearBucket());
         return bucket.tryConsume(tokensConsumidosPorPeticion);

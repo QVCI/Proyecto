@@ -14,17 +14,17 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 
+//Genera los JWT
 @Component
 public class JwtUtil {
 
+    //Extrae el certificado autogenerado de aplications properties
     @Value("${configuraciones.jwt.certificadoAutogenerado}")
-    private String certificadoAutogenerado;
-    
-    
+    private String certificadoAutogenerado;  
 
     private Key clave;
 
-  @PostConstruct
+    @PostConstruct
     public void init() 
     {
         this.clave = Keys.hmacShaKeyFor(certificadoAutogenerado.getBytes());

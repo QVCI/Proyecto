@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+//Entidad para Querry de tabla usuario
 @Entity
 @Table(name = "usuario")
 public class TrabajadorEntidad {

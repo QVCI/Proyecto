@@ -13,6 +13,22 @@ import com.bersamed.ServidorWeb.Seguridad.Configuraciones.RateLimiting;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+/*
+    Endpoints para el login de usuarios con JWT.
+                post(/login/trabajadores)
+            {
+            "usuario": " ",
+            "password": " "
+            }
+
+                post(/login/clientes)
+            {
+            "RazonSocial": " ",
+            "RFC": " "
+            }
+
+ */
+
 @RestController
 @RequestMapping("/login")
 public class ControladorAuth {
@@ -28,14 +44,18 @@ public class ControladorAuth {
     public ResponseEntity<String> loginTrabajadores(@RequestBody PeticionLoginTrabajadores peticion, HttpServletRequest request) throws Exception {
         String ip = request.getRemoteAddr();
 
+
+        //valida la cantidad de peticiones ya hechas
         if (!rateLimiting.permitirPeticion(ip)) {
             return ResponseEntity.status(429).body("Demasiados intentos. Intenta de nuevo en un momento.");
         }
 
+        //Envía el JWT
         try {
             String token = autenticacionServicio.iniciarSesionTrabajador(peticion.getUsuario(), peticion.getPassword());
             return ResponseEntity.ok(token);
-        } catch (RuntimeException ex) {
+        } 
+        catch (RuntimeException ex) {
             return ResponseEntity.status(401).body(ex.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error interno del servidor");
@@ -45,10 +65,13 @@ public class ControladorAuth {
     public ResponseEntity<String> loginClientes(@RequestBody PeticionLoginClientes peticion, HttpServletRequest request) throws Exception {
         String ip = request.getRemoteAddr();
 
+
+        //valida la cantidad de peticiones ya hechas
         if (!rateLimiting.permitirPeticion(ip)) {
             return ResponseEntity.status(429).body("Demasiados intentos. Intenta de nuevo en un momento.");
         }
        
+        //Envía el JWT
         try {
             String token = autenticacionServicio.iniciarSesionCliente(peticion.getRazonSocial(), peticion.getRfc());
             return ResponseEntity.ok(token);
