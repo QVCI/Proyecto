@@ -1,4 +1,4 @@
-package com.bersamed.ServidorWeb.Controladores.Endpoints.Controladores;
+package com.bersamed.ServidorWeb.Controladores.Endpoints.Controladores.Login;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
