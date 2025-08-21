@@ -19,6 +19,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/login/**").permitAll()
+                .requestMatchers("**").permitAll()
                 .anyRequest().authenticated()
             )
             // Agrega tu filtro JWT antes del filtro de usuario/contraseña

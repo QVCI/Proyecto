@@ -1,4 +1,4 @@
-package com.bersamed.ServidorWeb.Estructuras.Entidades;
+package com.bersamed.ServidorWeb.Estructuras.Entidades.Login;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

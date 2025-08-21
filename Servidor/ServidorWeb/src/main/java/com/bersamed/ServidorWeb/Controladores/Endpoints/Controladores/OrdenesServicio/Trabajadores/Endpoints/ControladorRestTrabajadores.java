@@ -1,5 +1,7 @@
 package com.bersamed.ServidorWeb.Controladores.Endpoints.Controladores.OrdenesServicio.Trabajadores.Endpoints;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios.SseServicio;
+import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.Comentario;
+import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.DatosServicio;
+import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.DetallesServicio;
+import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.MensajeMonitoreo;
+import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.Servicio;
 import com.bersamed.ServidorWeb.Seguridad.Tokens.RolesUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,12 +60,17 @@ public class ControladorRestTrabajadores
     }
 
     @GetMapping("Ordenes")
-    public ResponseEntity<String> getOrdenesServicio(HttpServletRequest request) {
+    public ResponseEntity<Servicio> getOrdenesServicio(HttpServletRequest request) {
+        /* 
         if (!rolesUtil.validarAcceso(request, "Trabajador")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                                  .body("No tienes permiso para este endpoint");
         }
-        return ResponseEntity.ok("hola se enviara toda la info");
+        */
+    
+
+    
+    return ResponseEntity.ok(servicio);
     }
     
     @PostMapping("/notificar")
@@ -67,7 +79,7 @@ public class ControladorRestTrabajadores
         @RequestParam String idUsuarioCliente,
         HttpServletRequest request) {
 
-         if (!rolesUtil.validarAcceso(request, "Trabajador")) {
+         if (rolesUtil.validarAcceso(request, "Cliente")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                                  .body("No tienes permiso para este endpoint");
         }

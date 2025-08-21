@@ -1,4 +1,4 @@
-package com.bersamed.ServidorWeb.Estructuras.Json;
+package com.bersamed.ServidorWeb.Estructuras.Json.Login;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

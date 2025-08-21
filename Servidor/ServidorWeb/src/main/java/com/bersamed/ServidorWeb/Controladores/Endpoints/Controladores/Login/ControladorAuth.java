@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios.AutenticacionServicio;
-import com.bersamed.ServidorWeb.Estructuras.Json.PeticionLoginClientes;
-import com.bersamed.ServidorWeb.Estructuras.Json.PeticionLoginTrabajadores;
+import com.bersamed.ServidorWeb.Estructuras.Json.Login.PeticionLoginClientes;
+import com.bersamed.ServidorWeb.Estructuras.Json.Login.PeticionLoginTrabajadores;
 import com.bersamed.ServidorWeb.Seguridad.Configuraciones.RateLimiting;
 
 import jakarta.servlet.http.HttpServletRequest;

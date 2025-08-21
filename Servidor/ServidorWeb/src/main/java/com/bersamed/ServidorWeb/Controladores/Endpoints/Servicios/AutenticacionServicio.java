@@ -2,8 +2,8 @@ package com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios;
 
 import org.springframework.stereotype.Service;
 
-import com.bersamed.ServidorWeb.Estructuras.Entidades.ClienteEntidad;
-import com.bersamed.ServidorWeb.Estructuras.Entidades.TrabajadorEntidad;
+import com.bersamed.ServidorWeb.Estructuras.Entidades.Login.ClienteEntidad;
+import com.bersamed.ServidorWeb.Estructuras.Entidades.Login.TrabajadorEntidad;
 import com.bersamed.ServidorWeb.Repositorios.ClienteRepositorio;
 import com.bersamed.ServidorWeb.Repositorios.TrabajadorRepositorio;
 import com.bersamed.ServidorWeb.Seguridad.Hashing.HashUtil;

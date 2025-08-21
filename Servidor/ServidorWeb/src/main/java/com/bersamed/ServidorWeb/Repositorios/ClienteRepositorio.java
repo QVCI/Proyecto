@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.bersamed.ServidorWeb.Estructuras.Entidades.ClienteEntidad;
+import com.bersamed.ServidorWeb.Estructuras.Entidades.Login.ClienteEntidad;
 
 //Querry para buscar por razón social
 @Repository

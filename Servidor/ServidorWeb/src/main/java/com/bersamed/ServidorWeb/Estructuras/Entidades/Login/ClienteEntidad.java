@@ -1,4 +1,4 @@
-package com.bersamed.ServidorWeb.Estructuras.Entidades;
+package com.bersamed.ServidorWeb.Estructuras.Entidades.Login;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
