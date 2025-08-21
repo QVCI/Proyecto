@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios.SseServicio;
+import com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios.ordenesservicioServicio;
 import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.Comentario;
 import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.DatosServicio;
 import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.DetallesServicio;
@@ -41,11 +42,13 @@ public class ControladorRestTrabajadores
 {
     private final RolesUtil rolesUtil;
     private final SseServicio sseServicio;
+    private final ordenesservicioServicio ordenesServicioServicio;
 
-    public ControladorRestTrabajadores(RolesUtil rolesUtil, SseServicio sseServicio)
+    public ControladorRestTrabajadores(RolesUtil rolesUtil, SseServicio sseServicio, ordenesservicioServicio ordenesServicioServicio)
     {
         this.rolesUtil = rolesUtil;
         this.sseServicio = sseServicio;
+        this.ordenesServicioServicio = ordenesServicioServicio;
     }
 
     @GetMapping("Ordenes/{id}")
@@ -61,17 +64,16 @@ public class ControladorRestTrabajadores
 
    
     @GetMapping("Ordenes")
-    public ResponseEntity<Servicio> getOrdenesServicio(HttpServletRequest request) {
-        
+    public ResponseEntity<List<Servicio>>getOrdenesServicio(HttpServletRequest request) {
+        /* 
         if (!rolesUtil.validarAcceso(request, "Trabajador")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                                  .body("No tienes permiso para este endpoint");
         }
-        
-    
+        */
+      List<Servicio> servicios = ordenesServicioServicio.getAllServicios();
 
-    
-    return ResponseEntity.ok(servicio);
+    return ResponseEntity.ok(servicios);
     }
     
     
