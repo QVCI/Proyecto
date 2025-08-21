@@ -59,19 +59,21 @@ public class ControladorRestTrabajadores
         return ResponseEntity.ok("hola " + id);
     }
 
+   
     @GetMapping("Ordenes")
     public ResponseEntity<Servicio> getOrdenesServicio(HttpServletRequest request) {
-        /* 
+        
         if (!rolesUtil.validarAcceso(request, "Trabajador")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                                  .body("No tienes permiso para este endpoint");
         }
-        */
+        
     
 
     
     return ResponseEntity.ok(servicio);
     }
+    
     
     @PostMapping("/notificar")
     public ResponseEntity<String> notificarCambio(
