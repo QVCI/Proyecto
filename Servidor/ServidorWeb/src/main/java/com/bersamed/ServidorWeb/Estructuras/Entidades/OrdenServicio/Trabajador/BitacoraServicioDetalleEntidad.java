@@ -1,5 +1,7 @@
 package com.bersamed.ServidorWeb.Estructuras.Entidades.OrdenServicio.Trabajador;
 
+import com.bersamed.ServidorWeb.Estructuras.Entidades.Login.TrabajadorEntidad;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -63,6 +65,31 @@ public class BitacoraServicioDetalleEntidad {
 
     @Column(name = "coninicio")
     private boolean coninicio;
+
+    @Column(name = "usuarioresponsable")
+    private int usuarioresponsable;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuarioresponsable", referencedColumnName = "id_usuario", insertable = false, updatable = false)
+    private TrabajadorEntidad trabajadorResponsable;
+
+    
+
+    public int getUsuarioresponsable() {
+        return usuarioresponsable;
+    }
+
+    public void setUsuarioresponsable(int usuarioresponsable) {
+        this.usuarioresponsable = usuarioresponsable;
+    }
+
+    public TrabajadorEntidad getTrabajadorResponsable() {
+        return trabajadorResponsable;
+    }
+
+    public void setTrabajadorResponsable(TrabajadorEntidad trabajadorResponsable) {
+        this.trabajadorResponsable = trabajadorResponsable;
+    }
 
     public String getBcodigo() {
         return bcodigo;

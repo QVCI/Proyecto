@@ -14,21 +14,33 @@ import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.Serv
 import com.bersamed.ServidorWeb.Repositorios.BitacoraServicioRepositorio;
 
 import jakarta.transaction.Transactional;
-
 @Service
-public class ordenesservicioServicio 
-{
+public class ordenesservicioServicio {
     private final BitacoraServicioRepositorio servicioRepositorio;
 
-      public ordenesservicioServicio(BitacoraServicioRepositorio servicioRepositorio) {
+    public ordenesservicioServicio(BitacoraServicioRepositorio servicioRepositorio) {
         this.servicioRepositorio = servicioRepositorio;
     }
+
     @Transactional
-     public List<Servicio> getAllServicios() {
+    public List<Servicio> getAllServicios() {
         List<BitacoraServicioEntidad> servicios = servicioRepositorio.findAll();
+        return mapearEntidadADto(servicios);
+    }
+
+    @Transactional
+    public List<Servicio> getServiciosPorTrabajador(Long idTrabajador) {
+        List<BitacoraServicioEntidad> servicios = servicioRepositorio.findByTrabajador(idTrabajador);
+        return mapearEntidadADto(servicios);
+    }
+
+    /**
+     * 👇 Aquí concentras todo el mapeo de Entidad → DTO
+     */
+    private List<Servicio> mapearEntidadADto(List<BitacoraServicioEntidad> entidades) {
         List<Servicio> responses = new ArrayList<>();
 
-        for (BitacoraServicioEntidad s : servicios) {
+        for (BitacoraServicioEntidad s : entidades) {
             Servicio response = new Servicio();
             response.setIdServicio(s.getCodigo());
 
@@ -50,18 +62,33 @@ public class ordenesservicioServicio
                 DetallesServicio detalles = new DetallesServicio();
                 detalles.setNumeroDeOrden(s.getBitacoraServicioDetalleEntidad().getBcodigo());
                 detalles.setNumeroDeServicio(s.getBitacoraServicioDetalleEntidad().getPartida());
+                detalles.setIdDelTrabajadorResponsable(s.getBitacoraServicioDetalleEntidad().getUsuarioresponsable());
+
+                if (s.getBitacoraServicioDetalleEntidad().getTrabajadorResponsable().getAbreviatura().trim().isEmpty()) {
+                    detalles.setNombreDelTrabajadorResponsable(
+                        s.getBitacoraServicioDetalleEntidad().getTrabajadorResponsable().getNombre()
+                    );
+                } else {
+                    detalles.setNombreDelTrabajadorResponsable(
+                        s.getBitacoraServicioDetalleEntidad().getTrabajadorResponsable().getAbreviatura() + " " +
+                        s.getBitacoraServicioDetalleEntidad().getTrabajadorResponsable().getNombre()
+                    );
+                }
+
                 datos.setEstadoServicio(
                     EstadoDelServicio(
-                        s.getBitacoraServicioDetalleEntidad().isConautomovil(), 
-                        s.getBitacoraServicioDetalleEntidad().isConentransito(), 
-                        s.getBitacoraServicioDetalleEntidad().isConatendiendo(), 
-                        s.getBitacoraServicioDetalleEntidad().isConresuelto(), 
-                        s.getBitacoraServicioDetalleEntidad().isConnoresuelto(), 
-                        s.getBitacoraServicioDetalleEntidad().isConretorno(), 
-                        s.getBitacoraServicioDetalleEntidad().isConparo(), 
-                        s.getBitacoraServicioDetalleEntidad().isContermino(), 
-                        s.getBitacoraServicioDetalleEntidad().isConvisitaprogramada(), 
-                        s.getBitacoraServicioDetalleEntidad().isConinicio()));
+                        s.getBitacoraServicioDetalleEntidad().isConautomovil(),
+                        s.getBitacoraServicioDetalleEntidad().isConentransito(),
+                        s.getBitacoraServicioDetalleEntidad().isConatendiendo(),
+                        s.getBitacoraServicioDetalleEntidad().isConresuelto(),
+                        s.getBitacoraServicioDetalleEntidad().isConnoresuelto(),
+                        s.getBitacoraServicioDetalleEntidad().isConretorno(),
+                        s.getBitacoraServicioDetalleEntidad().isConparo(),
+                        s.getBitacoraServicioDetalleEntidad().isContermino(),
+                        s.getBitacoraServicioDetalleEntidad().isConvisitaprogramada(),
+                        s.getBitacoraServicioDetalleEntidad().isConinicio()
+                    )
+                );
 
                 response.setDetallesServicio(detalles);
             }
@@ -83,60 +110,23 @@ public class ordenesservicioServicio
 
             responses.add(response);
         }
-
         return responses;
+    }
 
-        
+    private String EstadoDelServicio(boolean Automovil, boolean EnTransito,
+                                     boolean Atendido, boolean Resuelto, boolean NoResuelto,
+                                     boolean Retorno, boolean Paro, boolean Termino,
+                                     boolean VisitaProgramada, boolean Inicio) {
+        if (Automovil) return "En Automovil";
+        if (EnTransito) return "En Transito";
+        if (Atendido) return "Atendido";
+        if (Resuelto) return "Resuelto";
+        if (NoResuelto) return "No Resuelto";
+        if (Retorno) return "En Retorno";
+        if (Paro) return "En Paro";
+        if (Termino) return "En Termino";
+        if (VisitaProgramada) return "Con Visita Programada";
+        if (Inicio) return "Inicio";
+        return null;
     }
-    private String EstadoDelServicio(boolean Automovil, boolean EnTransito, 
-    boolean Atendido, boolean Resuelto, boolean NoResuelto, boolean Retorno, 
-    boolean Paro, boolean Termino, boolean VisitaProgramada, boolean Inicio)
-    {
-            if(Automovil)
-            {
-                return "Automovil";
-            }
-            if(EnTransito)
-            {
-                return "Transito";
-            }
-            if(Atendido)
-            {
-                return "Atendido";
-            }
-            if(Resuelto)
-            {
-                return "Resuelto";
-            }
-            if(NoResuelto)
-            {
-                return "No Resuelto";
-            }
-            if(Retorno)
-            {
-                return "Retorno";
-            }
-            if(Paro)
-            {
-                return "Paro";
-            }
-            if(Termino)
-            {
-                return "Paro";
-            }
-            if(Termino)
-            {
-                return "Termino";
-            }
-            if(VisitaProgramada)
-            {
-                return "VisitaProgramada";
-            }
-            if(Inicio)
-            {
-                return "Inicio";
-            }
-            return null;
-    }
-    
 }

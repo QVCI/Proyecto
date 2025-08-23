@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios.SseServicio;
 import com.bersamed.ServidorWeb.Controladores.Endpoints.Servicios.ordenesservicioServicio;
-import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.Comentario;
-import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.DatosServicio;
-import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.DetallesServicio;
-import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.MensajeMonitoreo;
+import com.bersamed.ServidorWeb.Estructuras.Entidades.OrdenServicio.Trabajador.BitacoraServicioEntidad;
 import com.bersamed.ServidorWeb.Estructuras.Json.OrdenesServicio.Trabajador.Servicio;
+import com.bersamed.ServidorWeb.Repositorios.BitacoraServicioRepositorio;
 import com.bersamed.ServidorWeb.Seguridad.Tokens.RolesUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,39 +41,58 @@ public class ControladorRestTrabajadores
     private final RolesUtil rolesUtil;
     private final SseServicio sseServicio;
     private final ordenesservicioServicio ordenesServicioServicio;
+     private final BitacoraServicioRepositorio bitacoraServicioRepositorio;
 
-    public ControladorRestTrabajadores(RolesUtil rolesUtil, SseServicio sseServicio, ordenesservicioServicio ordenesServicioServicio)
+    public ControladorRestTrabajadores(RolesUtil rolesUtil, SseServicio sseServicio, ordenesservicioServicio ordenesServicioServicio, BitacoraServicioRepositorio bitacoraServicioRepositorio )
     {
         this.rolesUtil = rolesUtil;
         this.sseServicio = sseServicio;
         this.ordenesServicioServicio = ordenesServicioServicio;
+        this.bitacoraServicioRepositorio = bitacoraServicioRepositorio; 
     }
 
     @GetMapping("Ordenes/{id}")
-    public ResponseEntity<String> getOrdenServicio(@PathVariable String id,
+    public ResponseEntity<?> getOrdenServicio(@PathVariable String id,
                                                    HttpServletRequest request) 
     {
-        if (!rolesUtil.validarAcceso(request, "Trabajador")) {
+        /*if (!rolesUtil.validarAcceso(request, "Trabajador")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                                  .body("Sin permisos necesarios");
         }
-        return ResponseEntity.ok("hola " + id);
-    }
-
-   
-    @GetMapping("Ordenes")
-    public ResponseEntity<List<Servicio>>getOrdenesServicio(HttpServletRequest request) {
-        /* 
-        if (!rolesUtil.validarAcceso(request, "Trabajador")) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                                 .body("No tienes permiso para este endpoint");
+        if(!rolesUtil.obtenerId(request).equals(id) )
+        {*/
+          
+        /* }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                                            .body("No se puede acceder");
+                                            */
+        List<Servicio> servicios = ordenesServicioServicio.getServiciosPorTrabajador(Long.valueOf(id));
+        if (servicios.isEmpty()) {
+            return ResponseEntity.noContent().build();
         }
-        */
-      List<Servicio> servicios = ordenesServicioServicio.getAllServicios();
-
-    return ResponseEntity.ok(servicios);
+        return ResponseEntity.ok(servicios);                           
+        
     }
-    
+
+    @GetMapping("Ordenes")
+    public ResponseEntity<?> getOrdenesServicio(HttpServletRequest request) 
+    {
+        /* 
+        if (!rolesUtil.validarAcceso(request, "Trabajador")) 
+        {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                                .body("No tienes permiso para este endpoint");
+        }*/
+        
+        List<Servicio> servicios = ordenesServicioServicio.getAllServicios();
+        if (servicios.isEmpty()) 
+        {
+            return ResponseEntity.noContent().build(); 
+        }
+        
+        return ResponseEntity.ok(servicios);
+    }
+
     
     @PostMapping("/notificar")
     public ResponseEntity<String> notificarCambio(
